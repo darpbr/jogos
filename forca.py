@@ -13,9 +13,6 @@ def jogar():
     letras_erradas = set()
     letras_certas = ['_' for letra in palavra_secreta]
 
-    # for espacos in palavra_secreta:
-    #     letras_certas.append('_')
-
     while (not enforcou) and (not acertou):
         print(f'Letras erradas: {letras_erradas}')
         print(letras_certas)
@@ -32,17 +29,101 @@ def jogar():
         else:
             letras_erradas.add(chute.upper())
             erros += 1
-            print(f'Palavra não tem esta letra. Você ainda tem {6 - erros} tentativas.')
+            desenha_forca(erros)
 
         acertou = '_' not in letras_certas
-        enforcou = erros == 6
+        enforcou = erros == 7
     
     if acertou:
-        print(f'Parabéns! Você descobriu a palavra secreta: {palavra_secreta} em {erros} tentativas.')
+        imprime_mensagem_vencedor()
     else:
-        print(f'Não foi desta vez. Você foi enforcado, a palavra era: {palavra_secreta}')
+        imprime_mensagem_perdedor(palavra_secreta)
 
     print('Fim do jogo!')
+
+
+def desenha_forca(erros):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if(erros == 1):
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 2):
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 3):
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 4):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 5):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if(erros == 6):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if (erros == 7):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
+
+def imprime_mensagem_vencedor():
+    print("Parabéns, você ganhou!")
+    print("       ___________      ")
+    print("      '._==_==_=_.'     ")
+    print("      .-\\:      /-.    ")
+    print("     | (|:.     |) |    ")
+    print("      '-|:.     |-'     ")
+    print("        \\::.    /      ")
+    print("         '::. .'        ")
+    print("           ) (          ")
+    print("         _.' '._        ")
+    print("        '-------'       ")
+
+def imprime_mensagem_perdedor(palavra_secreta):
+    print("Puxa, você foi enforcado!")
+    print("A palavra era {}".format(palavra_secreta))
+    print("    _______________         ")
+    print("   /               \       ")
+    print("  /                 \      ")
+    print("//                   \/\  ")
+    print("\|   XXXX     XXXX   | /   ")
+    print(" |   XXXX     XXXX   |/     ")
+    print(" |   XXX       XXX   |      ")
+    print(" |                   |      ")
+    print(" \__      XXX      __/     ")
+    print("   |\     XXX     /|       ")
+    print("   | |           | |        ")
+    print("   | I I I I I I I |        ")
+    print("   |  I I I I I I  |        ")
+    print("   \_             _/       ")
+    print("     \_         _/         ")
+    print("       \_______/           ")
 
 def recupera_palavra_secreta():
     arquivo = open('palavras.txt','r')
